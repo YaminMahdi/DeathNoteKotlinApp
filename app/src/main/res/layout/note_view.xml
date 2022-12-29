@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+
+    >
+    <View
+        android:id="@+id/colorBer"
+        android:layout_width="3dp"
+        android:layout_height="match_parent"
+        android:background="@color/green"
+        android:layout_marginStart="17sp"
+        android:layout_marginVertical="2sp"
+
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginVertical="2dp"
+        android:layout_marginEnd="17dp"
+        android:hapticFeedbackEnabled="true"
+        android:orientation="vertical"
+        android:paddingHorizontal="1dp"
+        android:paddingVertical="5dp"
+        android:background="@color/blackY"
+
+        tools:ignore="UselessParent">
+
+        <View
+            android:id="@+id/colorTop"
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:background="@color/blackY"
+            android:layout_marginVertical="3sp"
+            android:layout_marginHorizontal="20dp"
+            />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="10dp"
+            android:paddingBottom="2sp">
+
+
+            <TextView
+                android:id="@+id/titleId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/clacon"
+                android:text="Date &amp; Time: "
+                android:textColor="@color/green"
+                android:textSize="11sp"
+                tools:ignore="HardcodedText" />
+            <TextView
+                android:id="@+id/timeShowId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/clacon"
+                android:text="24 July, 4:24 PM"
+                android:textColor="@color/white"
+                android:textSize="11sp"
+                tools:ignore="HardcodedText" />
+
+
+        </LinearLayout>
+        <in.codeshuffle.typewriterview.TypeWriterView
+            android:id="@+id/NoteId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/clacon"
+            android:paddingHorizontal="10sp"
+            android:paddingVertical="5dp"
+            android:lineSpacingExtra="6sp"
+            android:text="Bla bla bla ...Bla bla bla ...Bla bla bla ...Bla bla bla ...Bla bla bla ...Bla bla bla ...Bla bla bla ...Bla bla bla ...Bla bla bla ...Bla bla bla ..."
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+
+</LinearLayout>
