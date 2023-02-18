@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "46592614022",
+    "project_id": "death-note-1fcba",
+    "storage_bucket": "death-note-1fcba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:46592614022:android:bdbbdddde436cd81a23b07",
+        "android_client_info": {
+          "package_name": "com.yklab.deathnote"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "46592614022-4s6n6a3l1aio31sfb9m995485upc121b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-Xi1CPFBcHLq-OpTGEEo6iJQlrXz2v2Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "46592614022-4s6n6a3l1aio31sfb9m995485upc121b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

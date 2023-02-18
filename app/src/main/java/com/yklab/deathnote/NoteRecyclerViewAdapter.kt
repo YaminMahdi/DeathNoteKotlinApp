@@ -12,17 +12,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat.recreate
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.CollectionReference
+import com.yklab.deathnote.model.NoteInfo
 import com.yklab.deathnote.databinding.DialogLayoutViewBinding
 import com.yklab.deathnote.databinding.NoteViewBinding
-import p32929.androideasysql_library.EasyDB
 
 
-data class NoteInfo(val id: Int,val note: String, val time: String)
 
-class NoteRecyclerViewAdapter(private val noteList: List<NoteInfo>) :
+class NoteRecyclerViewAdapter(private val noteList: List<NoteInfo>, private val viewModel: MainViewModel, private val db: CollectionReference) :
     RecyclerView.Adapter<NoteRecyclerViewAdapter.ViewHolder>() {
 
-    class ViewHolder(private val binding: NoteViewBinding, private val context: Context) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: NoteViewBinding, private val context: Context, private val viewModel: MainViewModel, private val db: CollectionReference) : RecyclerView.ViewHolder(binding.root) {
 
 
         fun bindView(noteList: List<NoteInfo>, position: Int) {
@@ -42,24 +42,27 @@ class NoteRecyclerViewAdapter(private val noteList: List<NoteInfo>) :
                 binding.NoteId.removeAnimation()
                 val dialog= Dialog(it.context)
                 val dialogBinding = DialogLayoutViewBinding.inflate(LayoutInflater.from(it.context))
-                val easyDB = EasyDB.init(it.context, "TEST")
-                    .addColumn("time", "text")
-                    .addColumn("note", "text")
-                    .doneTableColumn()
                 dialog.window?.setBackgroundDrawable(ColorDrawable(0))
                 dialog.setContentView(dialogBinding.root)
                 //dialog.setCancelable(false)
 
                 dialogBinding.editField.setText(binding.NoteId.text.toString())
                 dialogBinding.btnSaveNote.setOnClickListener {
-                    easyDB.updateData(2, dialogBinding.editField.text.toString())
-                        .rowID(noteList[position].id)
+                    val newNote = noteList[position].copy(note = dialogBinding.editField.text.toString())
+                    viewModel.updateNote(newNote)
+                    db.document(newNote.id.toString()).set(newNote)
+
+//                    easyDB.updateData(2, dialogBinding.editField.text.toString())
+//                        .rowID(noteList[position].id)
                     dialog.dismiss()
                     //NoteRecyclerViewAdapter(noteList).updateData(position)
                     recreate(context as Activity)
                 }
                 dialogBinding.btnDeleteNote.setOnClickListener {
-                    easyDB.deleteRow(noteList[position].id)
+                    viewModel.deleteNote(noteList[position])
+                    db.document(noteList[position].id.toString()).delete()
+
+                    //easyDB.deleteRow(noteList[position].id)
                     dialog.dismiss()
                     recreate(context as Activity)
                 }
@@ -90,7 +93,8 @@ class NoteRecyclerViewAdapter(private val noteList: List<NoteInfo>) :
             viewGroup,
             false
         ),
-        viewGroup.context
+        viewGroup.context,
+        viewModel,db
     )
 
     override fun getItemCount() = noteList.size
